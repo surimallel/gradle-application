@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK 21'
-        gradle 'Gradle 8.14.3'
-    }
-
     stages {
         stage('Build and test') {
             steps {

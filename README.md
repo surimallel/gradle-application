@@ -16,9 +16,10 @@ Gradle writes the runnable JAR to `build/libs/`.
 
 ## Run in Jenkins
 
-1. Configure a JDK installation named **JDK 21** and a Gradle installation
-   named **Gradle 8.14.3** in **Manage Jenkins → Tools**. Use Gradle 8.14.3
-   or newer.
+1. Make JDK 21 and Gradle 8.14.3 or newer available on the Jenkins agent's
+   `PATH` (and set `JAVA_HOME` to JDK 21 if needed). The pipeline invokes
+   `gradle` directly, so it does not depend on Jenkins tool installation
+   names.
 2. Create a Pipeline job pointing at this repository (or a Multibranch
    Pipeline job).
 3. Ensure the job can check out its source, then run the pipeline. Jenkins
