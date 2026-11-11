@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Build and test') {
             steps {
-                sh 'gradle clean test build'
+                sh 'bash gradlew clean test build'
             }
         }
 
         stage('Run application') {
             steps {
-                sh 'gradle run'
+                sh 'bash gradlew run'
             }
         }
     }
