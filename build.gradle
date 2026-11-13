@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'jacoco'
     id 'org.sonarqube' version '7.5.0.8588'
 }
 
@@ -10,6 +11,7 @@ sonar {
     properties {
         property 'sonar.projectKey', 'sonar-gradle'
         property 'sonar.projectName', 'sonar-gradle'
+        property 'sonar.coverage.jacoco.xmlReportPaths', "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
 
@@ -34,4 +36,17 @@ application {
 
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy tasks.named('jacocoTestReport')
+}
+
+tasks.named('jacocoTestReport') {
+    dependsOn tasks.named('test')
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+tasks.named('sonar') {
+    dependsOn tasks.named('jacocoTestReport')
 }
