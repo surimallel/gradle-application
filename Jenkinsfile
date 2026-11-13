@@ -8,6 +8,14 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv() {
+                    sh 'bash gradlew sonar'
+                }
+            }
+        }
+
         stage('Run application') {
             steps {
                 sh 'bash gradlew run'
